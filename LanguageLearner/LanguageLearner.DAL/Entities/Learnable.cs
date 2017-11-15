@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace LanguageLearner.DAL
+namespace LanguageLearner.DAL.Entities
 {
     public class Learnable
     {

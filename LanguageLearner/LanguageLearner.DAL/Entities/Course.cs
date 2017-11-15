@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace LanguageLearner.DAL
+namespace LanguageLearner.DAL.Entities
 {
     public class Course
     {

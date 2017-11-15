@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using LanguageLearner.DAL.Context;
 using Microsoft.EntityFrameworkCore;
+using LanguageLearner.DAL.Entities;
+using Microsoft.AspNetCore.Identity;
 
 namespace LanguageLearner.ANG
 {
@@ -26,6 +28,10 @@ namespace LanguageLearner.ANG
         {
             services.AddDbContext<LanguageLearnerContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<LanguageLearnerContext>()
+                .AddDefaultTokenProviders();
 
             services.AddMvc();
         }
