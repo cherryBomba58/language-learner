@@ -21,7 +21,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\classes\course.ts" />
+    <None Remove="ClientApp\app\classes\learnable.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\LanguageLearner.DAL\LanguageLearner.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\classes\course.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\learnable.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\course.service.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

@@ -7,13 +7,13 @@ using Microsoft.AspNetCore.Mvc;
 namespace LanguageLearner.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class CourseController : Controller
     {
         // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            return Json("OK");
         }
 
         // GET api/values/5
