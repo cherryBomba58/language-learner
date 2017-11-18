@@ -1,7 +1,5 @@
-<h1>Counter</h1>
+<h1>Kérdéssor</h1>
 
-<p>This is a simple example of an Angular component.</p>
+<h3>Válassz az alábbi leckék közül gyakorlásra!</h3>
 
-<p>Current count: <strong>{{ currentCount }}</strong></p>
-
-<button (click)="incrementCounter()">Increment</button>
+<p *ngFor="let course of courses | async">{{course.courseID}}: {{course.name}}</p>

@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LanguageLearner.BLL\LanguageLearner.BLL.csproj" />
     <ProjectReference Include="..\LanguageLearner.DAL\LanguageLearner.DAL.csproj" />
   </ItemGroup>
 

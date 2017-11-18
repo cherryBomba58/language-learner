@@ -11,6 +11,7 @@ using LanguageLearner.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using LanguageLearner.DAL.Entities;
 using Microsoft.AspNetCore.Identity;
+using LanguageLearner.BLL.Managers;
 
 namespace LanguageLearner.ANG
 {
@@ -32,6 +33,8 @@ namespace LanguageLearner.ANG
             services.AddIdentity<User, IdentityRole>()
                 .AddEntityFrameworkStores<LanguageLearnerContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddScoped<CourseManager>();
 
             services.AddMvc();
         }

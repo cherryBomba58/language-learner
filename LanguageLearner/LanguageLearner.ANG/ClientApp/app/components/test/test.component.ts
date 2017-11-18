@@ -1,23 +1,23 @@
-import { Component, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
+import { CourseService } from '../../services/course.service';
+import { Course } from "../../classes/course";
 
 @Component({
     selector: 'test',
     templateUrl: './test.component.html'
 })
-export class TestComponent {
-    public forecasts: WeatherForecast[];
+export class TestComponent implements OnInit {
+    courses: Observable<Course[]>;
 
-    constructor(http: Http, @Inject('BASE_URL') baseUrl: string) {
-        http.get(baseUrl + 'api/SampleData/WeatherForecasts').subscribe(result => {
-            this.forecasts = result.json() as WeatherForecast[];
-        }, error => console.error(error));
+    constructor(private courseService: CourseService) { }
+
+    ngOnInit() {
+        this.getCourses();
     }
-}
 
-interface WeatherForecast {
-    dateFormatted: string;
-    temperatureC: number;
-    temperatureF: number;
-    summary: string;
+    getCourses() {
+        this.courses = this.courseService.getCourses();
+    }
 }

@@ -3,7 +3,6 @@
 export class Course {
     constructor(
         courseID: number,
-        name: string,
-        learnableList: Learnable[]
+        name: string
     ) { }
 }
