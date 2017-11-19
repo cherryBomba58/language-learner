@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MdToolbarModule, MdRadioModule, MdButtonModule, MdIconModule, MdInputModule, MdCardModule, MdCheckboxModule } from '@angular/material';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
@@ -33,7 +34,14 @@ import { CourseService } from './services/course.service';
             { path: 'test', component: TestComponent },
             { path: 'login', component: LoginComponent },
             { path: '**', redirectTo: 'home' }
-        ])
+        ]),
+        MdToolbarModule,
+        MdRadioModule,
+        MdButtonModule,
+        MdIconModule,
+        MdInputModule,
+        MdCardModule,
+        MdCheckboxModule
     ],
     providers: [
         CourseService
