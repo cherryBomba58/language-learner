@@ -6,7 +6,8 @@ import { Course } from "../../classes/course";
 
 @Component({
     selector: 'questions',
-    templateUrl: './questions.component.html'
+    templateUrl: './questions.component.html',
+    styleUrls: ['./questions.component.css']
 })
 export class QuestionsComponent implements OnInit {
     courses: Observable<Course[]>;
