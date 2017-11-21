@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2006
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageLearner.WPF", "LanguageLearner.WPF\LanguageLearner.WPF.csproj", "{503D873C-5969-4817-B85D-96EA8ADB0DC0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageLearner.ANG", "LanguageLearner.ANG\LanguageLearner.ANG.csproj", "{037E4F0D-A847-43C3-977B-410707EDAEA8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageLearner.ANG", "LanguageLearner.ANG\LanguageLearner.ANG.csproj", "{037E4F0D-A847-43C3-977B-410707EDAEA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageLearner.BLL", "LanguageLearner.BLL\LanguageLearner.BLL.csproj", "{6B8462B9-C8FD-4281-86E9-FBA196F92724}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageLearner.BLL", "LanguageLearner.BLL\LanguageLearner.BLL.csproj", "{6B8462B9-C8FD-4281-86E9-FBA196F92724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanguageLearner.DAL", "LanguageLearner.DAL\LanguageLearner.DAL.csproj", "{E4F41B07-09E9-4A78-B218-00E7F8F3BB4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LanguageLearner.DAL", "LanguageLearner.DAL\LanguageLearner.DAL.csproj", "{E4F41B07-09E9-4A78-B218-00E7F8F3BB4A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

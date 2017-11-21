@@ -13,16 +13,26 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LanguageLearner.WPF
+namespace LanguageLearner.WPF.Menu
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Login.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Login : UserControl, ISwitchable
     {
-        public MainWindow()
+        public Login()
         {
             InitializeComponent();
+        }
+
+        public void UtilizeState(object state)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void Login_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new CourseOverview());
         }
     }
 }
