@@ -2,7 +2,7 @@
 
 export class Course {
     constructor(
-        courseID: number,
-        name: string
+        public courseID: number,
+        public name: string
     ) { }
 }

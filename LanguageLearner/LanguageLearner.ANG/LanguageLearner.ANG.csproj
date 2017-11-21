@@ -24,6 +24,8 @@
   <ItemGroup>
     <None Remove="ClientApp\app\classes\course.ts" />
     <None Remove="ClientApp\app\classes\learnable.ts" />
+    <None Remove="ClientApp\app\classes\questionsType.ts" />
+    <None Remove="ClientApp\app\classes\questionTypesModel.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +36,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\classes\course.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\learnable.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\questionsType.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\questionTypesModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\course.service.ts" />
   </ItemGroup>
 
