@@ -35,6 +35,7 @@ namespace LanguageLearner.ANG
                 .AddDefaultTokenProviders();
 
             services.AddScoped<CourseManager>();
+            services.AddScoped<LearnableManager>();
 
             services.AddMvc();
         }

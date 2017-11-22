@@ -7,3 +7,9 @@
     Kérdéssor típus: {{qtype}}
     Kurzus típus: {{courseID}}
 </code>
+
+<div *ngFor="let learnable of learnablelist | async">
+    <div *ngIf="qtype==0 || qtype==3 || qtype==4">{{learnable.hungarian}}</div>
+    <div *ngIf="qtype==1">{{learnable.english}}</div>
+    <div *ngIf="qtype==2">{{learnable.pictureUrl}}</div>
+</div>

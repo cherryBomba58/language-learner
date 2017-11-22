@@ -15,6 +15,7 @@ import { TaskComponent } from './components/task/task.component';
 
 import { CourseService } from './services/course.service';
 import { QuestionTypeService } from "./services/questiontype.service";
+import { LearnableService } from "./services/learnable.service";
 
 @NgModule({
     declarations: [
@@ -49,7 +50,8 @@ import { QuestionTypeService } from "./services/questiontype.service";
     ],
     providers: [
         CourseService,
-        QuestionTypeService
+        QuestionTypeService,
+        LearnableService
     ]
 })
 export class AppModuleShared {
