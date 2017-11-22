@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { CourseService } from '../../services/course.service';
 import { Course } from "../../classes/course";
+import { QuestionType } from "../../classes/questionType";
+
+import { CourseService } from '../../services/course.service';
+import { QuestionTypeService } from '../../services/questiontype.service';
 
 @Component({
     selector: 'test',
@@ -11,7 +15,11 @@ import { Course } from "../../classes/course";
 export class TestComponent implements OnInit {
     courses: Observable<Course[]>;
 
-    constructor(private courseService: CourseService) { }
+    constructor(
+        private router: Router,
+        private courseService: CourseService,
+        private questionTypeService: QuestionTypeService
+    ) { }
 
     ngOnInit() {
         this.getCourses();
@@ -19,5 +27,10 @@ export class TestComponent implements OnInit {
 
     getCourses() {
         this.courses = this.courseService.getCourses();
+    }
+
+    startTest(courseID: number) {
+        this.questionTypeService.setQuestionType(QuestionType.Test);
+        this.router.navigate(['/task', courseID]);
     }
 }

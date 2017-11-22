@@ -1,8 +1,8 @@
-﻿import { QuestionsType } from "./questionsType";
+﻿import { QuestionType } from "./questionType";
 
 export class QuestionTypesModel {
     constructor(
-        public id: QuestionsType,
+        public id: QuestionType,
         public text: string
     ) { }
 }

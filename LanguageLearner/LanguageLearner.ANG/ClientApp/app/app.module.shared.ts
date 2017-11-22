@@ -11,8 +11,10 @@ import { HomeComponent } from './components/home/home.component';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
+import { TaskComponent } from './components/task/task.component';
 
 import { CourseService } from './services/course.service';
+import { QuestionTypeService } from "./services/questiontype.service";
 
 @NgModule({
     declarations: [
@@ -21,6 +23,7 @@ import { CourseService } from './services/course.service';
         QuestionsComponent,
         TestComponent,
         LoginComponent,
+        TaskComponent,
         HomeComponent
     ],
     imports: [
@@ -33,6 +36,7 @@ import { CourseService } from './services/course.service';
             { path: 'questions', component: QuestionsComponent },
             { path: 'test', component: TestComponent },
             { path: 'login', component: LoginComponent },
+            { path: 'task/:courseid', component: TaskComponent },
             { path: '**', redirectTo: 'home' }
         ]),
         MdToolbarModule,
@@ -44,7 +48,8 @@ import { CourseService } from './services/course.service';
         MdCheckboxModule
     ],
     providers: [
-        CourseService
+        CourseService,
+        QuestionTypeService
     ]
 })
 export class AppModuleShared {

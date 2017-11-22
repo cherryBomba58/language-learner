@@ -1,10 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { CourseService } from '../../services/course.service';
 import { Course } from "../../classes/course";
-import { QuestionsType } from "../../classes/questionsType";
+import { QuestionType } from "../../classes/questionType";
 import { QuestionTypesModel } from "../../classes/questionTypesModel";
+
+import { CourseService } from '../../services/course.service';
+import { QuestionTypeService } from '../../services/questiontype.service';
 
 @Component({
     selector: 'questions',
@@ -13,16 +16,20 @@ import { QuestionTypesModel } from "../../classes/questionTypesModel";
 })
 export class QuestionsComponent implements OnInit {
     courses: Observable<Course[]>;
-    qtype: QuestionsType = QuestionsType.ToEnglish;
+    qtype: QuestionType = QuestionType.ToEnglish;
 
     qmodels: QuestionTypesModel[] = [
-        new QuestionTypesModel(QuestionsType.ToEnglish, 'Magyarról angolra fordítás'),
-        new QuestionTypesModel(QuestionsType.ToHungarian, 'Angolról magyarra fordítás'),
-        new QuestionTypesModel(QuestionsType.ToImages, 'Képekhez szavak írása'),
-        new QuestionTypesModel(QuestionsType.RightWord, 'Helyes szó kiválasztása egy listáról')
+        new QuestionTypesModel(QuestionType.ToEnglish, 'Magyarról angolra fordítás'),
+        new QuestionTypesModel(QuestionType.ToHungarian, 'Angolról magyarra fordítás'),
+        new QuestionTypesModel(QuestionType.ToImages, 'Képekhez szavak írása'),
+        new QuestionTypesModel(QuestionType.RightWord, 'Helyes szó kiválasztása egy listáról')
     ];
 
-    constructor(private courseService: CourseService) { }
+    constructor(
+        private router: Router,
+        private courseService: CourseService,
+        private questionTypeService: QuestionTypeService
+    ) { }
 
     ngOnInit() {
         this.getCourses();
@@ -33,6 +40,7 @@ export class QuestionsComponent implements OnInit {
     }
 
     startQuestions(courseID: number) {
-        console.log(courseID, this.qtype, this.qmodels);
+        this.questionTypeService.setQuestionType(this.qtype);
+        this.router.navigate(['/task', courseID]);
     }
 }
