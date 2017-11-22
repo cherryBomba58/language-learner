@@ -6,12 +6,15 @@
              xmlns:local="clr-namespace:LanguageLearner.WPF.Menu"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="525">
-    <Grid>
-        <Button Content="Bejelentkezés" HorizontalAlignment="Left" Margin="314,224,0,0" VerticalAlignment="Top" Width="75" Click="Login_Click"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="176,111,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="176,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Felhasználó:" HorizontalAlignment="Left" Margin="100,108,0,0" VerticalAlignment="Top"/>
-        <Label Content="Jelszó:" HorizontalAlignment="Left" Margin="130,158,0,0" VerticalAlignment="Top"/>
-
+    <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
+        <Button Content="Bejelentkezés" Margin="215,207,210,68" Click="Login_Click" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="#6a2eb5" BorderBrush="{x:Null}"/>
+        <TextBox Margin="239,104,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
+        <TextBox Margin="239,155,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
+        <Label Content="Felhasználó:" Margin="163,101,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74"/>
+        <Label Content="Jelszó:" Margin="193,152,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="44"/>
+        <Border Background="#6a2eb5" BorderThickness="0" Height="36" VerticalAlignment="Top"/>
+        <Label Content="Language Learner" HorizontalAlignment="Left" Width="156" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Height="36" VerticalAlignment="Top"/>
+        <Border Background="#6a2eb5" BorderThickness="0" Height="36" VerticalAlignment="Bottom"/>
+        <Button Content="Kilépés" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="Exit_Click" Height="36" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="100" Margin="425,0,0,0"/>
     </Grid>
 </UserControl>

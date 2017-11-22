@@ -23,6 +23,7 @@ namespace LanguageLearner.WPF.Menu
     /// </summary>
     public partial class CourseOverview : UserControl, ISwitchable
     {
+        #region Constructor
         public CourseOverview()
         {
             InitializeComponent();
@@ -31,8 +32,16 @@ namespace LanguageLearner.WPF.Menu
             initCourses();
         }
 
+        public void UtilizeState(object state)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
+
         private void initCourses()
         {
+            courseList = new List<string>();
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:26100/");
@@ -65,9 +74,26 @@ namespace LanguageLearner.WPF.Menu
 
 
 
-        public void UtilizeState(object state)
+        #region Menu changes
+        private void CoursesMenu_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Switcher.Switch(new CourseOverview());
         }
+
+        private void ProfileMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Profile());
+        }
+
+        private void LogoutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Login());
+        }
+
+        private void Exit_Click(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Application.Current.Shutdown();
+        }
+        #endregion
     }
 }

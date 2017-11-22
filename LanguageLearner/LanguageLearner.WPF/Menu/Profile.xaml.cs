@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace LanguageLearner.WPF.Menu
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class Login : UserControl, ISwitchable
+    public partial class Profile : UserControl, ISwitchable
     {
 
         #region Constructor
-        public Login()
+        public Profile()
         {
             InitializeComponent();
         }
@@ -32,12 +32,22 @@ namespace LanguageLearner.WPF.Menu
             throw new NotImplementedException();
         }
         #endregion
-
+        
 
         #region Menu changes
-        private void Login_Click(object sender, RoutedEventArgs e)
+        private void CoursesMenu_Click(object sender, RoutedEventArgs e)
         {
             Switcher.Switch(new CourseOverview());
+        }
+
+        private void ProfileMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Profile());
+        }
+
+        private void LogoutMenu_Click(object sender, RoutedEventArgs e)
+        {
+            Switcher.Switch(new Login());
         }
 
         private void Exit_Click(object sender, RoutedEventArgs e)
@@ -46,4 +56,5 @@ namespace LanguageLearner.WPF.Menu
         }
         #endregion
     }
+
 }
