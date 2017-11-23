@@ -44,7 +44,7 @@ namespace LanguageLearner.WPF.Menu
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:26100/");
+                client.BaseAddress = new Uri("http://localhost:57696/");
                 
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 
