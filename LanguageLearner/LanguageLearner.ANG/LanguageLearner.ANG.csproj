@@ -38,7 +38,6 @@
     <None Remove="ClientApp\app\classes\learnable.ts" />
     <None Remove="ClientApp\app\classes\questionTypesModel.ts" />
     <None Remove="ClientApp\app\components\task\task.component.ts" />
-    <None Remove="ClientApp\app\services\questiontype.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -54,7 +53,7 @@
     <TypeScriptCompile Include="ClientApp\app\components\task\task.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\learnable.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\course.service.ts" />
-    <TypeScriptCompile Include="ClientApp\app\services\questiontype.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\shared-data.service.ts" />
   </ItemGroup>
 
   <ItemGroup>

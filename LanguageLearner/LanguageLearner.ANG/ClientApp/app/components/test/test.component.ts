@@ -6,7 +6,7 @@ import { Course } from "../../classes/course";
 import { QuestionType } from "../../classes/questionType";
 
 import { CourseService } from '../../services/course.service';
-import { QuestionTypeService } from '../../services/questiontype.service';
+import { SharedDataService } from '../../services/shared-data.service';
 
 @Component({
     selector: 'test',
@@ -18,7 +18,7 @@ export class TestComponent implements OnInit {
     constructor(
         private router: Router,
         private courseService: CourseService,
-        private questionTypeService: QuestionTypeService
+        private sharedDataService: SharedDataService
     ) { }
 
     ngOnInit() {
@@ -29,8 +29,9 @@ export class TestComponent implements OnInit {
         this.courses = this.courseService.getCourses();
     }
 
-    startTest(courseID: number) {
-        this.questionTypeService.setQuestionType(QuestionType.Test);
+    startTest(courseID: number, courseName: string) {
+        this.sharedDataService.setQuestionType(QuestionType.Test);
+        this.sharedDataService.setCourseName(courseName);
         this.router.navigate(['/task', courseID]);
     }
 }

@@ -6,7 +6,7 @@ import { Course } from "../../classes/course";
 import { QuestionType } from "../../classes/questionType";
 import { Learnable } from "../../classes/learnable";
 
-import { QuestionTypeService } from '../../services/questiontype.service';
+import { SharedDataService } from '../../services/shared-data.service';
 import { LearnableService } from "../../services/learnable.service";
 
 @Component({
@@ -15,22 +15,28 @@ import { LearnableService } from "../../services/learnable.service";
 })
 export class TaskComponent implements OnInit {
     courseID: number;
+    courseName: string;
     qtype: QuestionType;
     learnablelist: Observable<Learnable[]>;
 
     constructor(
         private route: ActivatedRoute,
-        private questionTypeService: QuestionTypeService,
+        private sharedDataService: SharedDataService,
         private learnableService: LearnableService
     ) { }
 
     ngOnInit() {
         this.courseID = +this.route.snapshot.params['courseid'];
-        this.qtype = this.questionTypeService.getQuestionType();
+        this.qtype = this.sharedDataService.getQuestionType();
         this.getLearnables();
+        this.getNameOfCourse();
     }
 
     getLearnables() {
         this.learnablelist = this.learnableService.getLearnables(this.courseID);
+    }
+
+    getNameOfCourse() {
+        this.courseName = this.sharedDataService.getCourseName();
     }
 }

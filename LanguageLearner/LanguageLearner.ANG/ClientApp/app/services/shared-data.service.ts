@@ -7,8 +7,9 @@ import 'rxjs/add/operator/map';
 import { QuestionType } from "../classes/questionType";
 
 @Injectable()
-export class QuestionTypeService {
+export class SharedDataService {
     qtype: QuestionType;
+    courseName: string;
 
     getQuestionType() {
         return this.qtype;
@@ -16,5 +17,13 @@ export class QuestionTypeService {
 
     setQuestionType(qtype: QuestionType) {
         this.qtype = qtype;
+    }
+
+    getCourseName() {
+        return this.courseName;
+    }
+
+    setCourseName(name: string) {
+        this.courseName = name;
     }
 }
