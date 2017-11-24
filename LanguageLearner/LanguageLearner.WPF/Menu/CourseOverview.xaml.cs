@@ -38,6 +38,32 @@ namespace LanguageLearner.WPF.Menu
         }
         #endregion
 
+
+        #region Properties
+        public String NewCourseName
+        {
+            get { return (String)GetValue(NewCourseNameProperty); }
+            set { SetValue(NewCourseNameProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for NewCourseName.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty NewCourseNameProperty =
+            DependencyProperty.Register("NewCourseName", typeof(String), typeof(CourseOverview), new PropertyMetadata(""));
+
+
+
+        public List<String> courseList
+        {
+            get { return (List<String>)GetValue(courseListProperty); }
+            set { SetValue(courseListProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty courseListProperty =
+            DependencyProperty.Register("MyProperty", typeof(List<String>), typeof(CourseOverview), new PropertyMetadata(new List<String>()));
+        #endregion
+
+
         private void initCourses()
         {
             courseList = new List<string>();
@@ -45,9 +71,9 @@ namespace LanguageLearner.WPF.Menu
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:57696/");
-                
+
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                
+
                 HttpResponseMessage response = client.GetAsync("api/course").Result;
                 if (response.IsSuccessStatusCode)
                 {
@@ -62,16 +88,25 @@ namespace LanguageLearner.WPF.Menu
             }
         }
 
-        public List<String> courseList
+        private void AddCourse_Click(object sender, RoutedEventArgs e)
         {
-            get { return (List<String>)GetValue(courseListProperty); }
-            set { SetValue(courseListProperty, value); }
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:57696/");
+
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                CourseModel newCourse = new CourseModel();
+                newCourse.Name = NewCourseName;
+                var content = new StringContent(newCourse.ToString(), Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = client.PostAsync("api/course",content).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    initCourses();
+                }
+            }
         }
-
-        // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty courseListProperty =
-            DependencyProperty.Register("MyProperty", typeof(List<String>), typeof(CourseOverview), new PropertyMetadata(new List<String>()));
-
 
 
         #region Menu changes
@@ -95,5 +130,7 @@ namespace LanguageLearner.WPF.Menu
             System.Windows.Application.Current.Shutdown();
         }
         #endregion
+
+        
     }
 }
