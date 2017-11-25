@@ -1,1 +1,6 @@
-﻿<h1>Üdvözöllek a Language Learner alkalmazásban!</h1>
+﻿<div *ngIf="user.isSignedIn == false">
+    <h1>Üdvözöllek a Language Learner alkalmazásban!</h1>
+</div>
+<div *ngIf="user.isSignedIn == true">
+    <h1>Üdvözöllek, {{user.name}}!</h1>
+</div>
