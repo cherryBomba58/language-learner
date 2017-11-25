@@ -19,24 +19,22 @@
   <ItemGroup>
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Compile Remove="Data\**" />
-    <Compile Remove="Models\**" />
     <Compile Remove="wwwroot\images\**" />
     <Content Remove="ClientApp\**" />
     <Content Remove="Data\**" />
-    <Content Remove="Models\**" />
     <Content Remove="wwwroot\images\**" />
     <EmbeddedResource Remove="Data\**" />
-    <EmbeddedResource Remove="Models\**" />
     <EmbeddedResource Remove="wwwroot\images\**" />
     <None Remove="Data\**" />
-    <None Remove="Models\**" />
     <None Remove="wwwroot\images\**" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="ClientApp\app\classes\course.ts" />
     <None Remove="ClientApp\app\classes\learnable.ts" />
+    <None Remove="ClientApp\app\classes\login.ts" />
     <None Remove="ClientApp\app\classes\questionTypesModel.ts" />
+    <None Remove="ClientApp\app\classes\regist.ts" />
     <None Remove="ClientApp\app\components\task\task.component.ts" />
   </ItemGroup>
 
@@ -48,8 +46,11 @@
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\classes\course.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\learnable.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\login.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\questionType.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\questionTypesModel.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\regist.ts" />
+    <TypeScriptCompile Include="ClientApp\app\components\results\results.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\task\task.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\learnable.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\course.service.ts" />
@@ -57,7 +58,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
     <Folder Include="Views\Shared\" />
   </ItemGroup>
 

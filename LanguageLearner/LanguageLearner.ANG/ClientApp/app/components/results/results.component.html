@@ -1,0 +1,46 @@
+﻿<h1>Eredménylap</h1>
+
+<h4>Lecke: {{courseName}}</h4>
+<h4>Pontszám: </h4>
+
+<div *ngFor="let learnable of learnablelist | async">
+    <div *ngIf="qtype==0 || qtype==3 || qtype==4" class="row form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <md-card>{{learnable.hungarian}}</md-card>
+        </div>
+        <div class="col-md-2">
+            <md-card>Helyes válasz: {{learnable.english}}</md-card>
+        </div>
+        <div class="col-md-3">
+            <md-card>A te válaszod: valami pipa/iksz</md-card>
+        </div>
+    </div>
+    <div *ngIf="qtype==1" class="row form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <md-card>{{learnable.english}}</md-card>
+        </div>
+        <div class="col-md-2">
+            <md-card>Helyes válasz: {{learnable.hungarian}}</md-card>
+        </div>
+        <div class="col-md-3">
+            <md-card>A te válaszod: valami pipa/iksz</md-card>
+        </div>
+    </div>
+    <div *ngIf="qtype==2" class="row form-group">
+        <div class="col-md-2 col-md-offset-2">
+            <md-card>{{learnable.pictureUrl}}</md-card>
+        </div>
+        <div class="col-md-2">
+            <md-card>Helyes válasz: {{learnable.english}}</md-card>
+        </div>
+        <div class="col-md-3">
+            <md-card>A te válaszod: valami pipa/iksz</md-card>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-3 col-md-offset-9">
+        <button md-raised-button color="primary">Kész</button>
+    </div>
+</div>

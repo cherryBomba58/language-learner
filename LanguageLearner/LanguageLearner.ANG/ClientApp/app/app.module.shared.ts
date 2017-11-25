@@ -13,6 +13,7 @@ import { TestComponent } from './components/test/test.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegistComponent } from './components/regist/regist.component';
 import { TaskComponent } from './components/task/task.component';
+import { ResultsComponent } from './components/results/results.component';
 
 import { CourseService } from './services/course.service';
 import { SharedDataService } from "./services/shared-data.service";
@@ -27,6 +28,7 @@ import { LearnableService } from "./services/learnable.service";
         LoginComponent,
         RegistComponent,
         TaskComponent,
+        ResultsComponent,
         HomeComponent
     ],
     imports: [
@@ -41,6 +43,7 @@ import { LearnableService } from "./services/learnable.service";
             { path: 'login', component: LoginComponent },
             { path: 'regist', component: RegistComponent },
             { path: 'task/:courseid', component: TaskComponent },
+            { path: 'results/:courseid', component: ResultsComponent },
             { path: '**', redirectTo: 'home' }
         ]),
         MdToolbarModule,
