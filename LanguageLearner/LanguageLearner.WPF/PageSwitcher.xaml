@@ -5,6 +5,6 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LanguageLearner.WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="338" Width="535" ResizeMode="CanMinimize">
+        Title="Language Learner Adminisztratív felület" Height="338" Width="535" ResizeMode="CanMinimize">
     <Grid/>
 </Window>
