@@ -13,7 +13,7 @@
 <h3>Válassz az alábbi leckék közül gyakorlásra!</h3>
 
 <div class="row">
-    <p class="col-md-4 col-sm-6" *ngFor="let course of courses | async">
+    <p class="col-md-3 col-sm-4" *ngFor="let course of courses | async">
         <button md-fab color="accent" (click)="startQuestions(course.courseID, course.name)"><md-icon>class</md-icon></button>  {{course.name}}
     </p>
 </div>

@@ -32,8 +32,5 @@
         <div class="text-danger" *ngIf="message?.succeeded == false">
             <div *ngFor="let err of message?.errors">{{err.description}}</div>
         </div>
-        <div class="text-success" *ngIf="message?.succeeded == true">
-            Sikerült a regisztráció!
-        </div>
     </div>
 </div>

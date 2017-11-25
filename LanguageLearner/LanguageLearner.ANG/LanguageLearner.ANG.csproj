@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\classes\course.ts" />
+    <None Remove="ClientApp\app\classes\identityUserModel.ts" />
     <None Remove="ClientApp\app\classes\learnable.ts" />
     <None Remove="ClientApp\app\classes\login.ts" />
     <None Remove="ClientApp\app\classes\questionTypesModel.ts" />
@@ -47,6 +48,7 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\classes\course.ts" />
+    <TypeScriptCompile Include="ClientApp\app\classes\identityUserModel.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\learnable.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\login.ts" />
     <TypeScriptCompile Include="ClientApp\app\classes\questionType.ts" />

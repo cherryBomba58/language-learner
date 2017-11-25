@@ -41,6 +41,18 @@ namespace LanguageLearner.ANG.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        public IActionResult GetIdentity()
+        {
+            var user = new IdentityUserModel()
+            {
+                IsSignedIn = User.Identity.IsAuthenticated,
+                Name = User.Identity.Name
+            };
+            return Json(user);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
             // Clear the existing external cookie to ensure a clean login process

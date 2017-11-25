@@ -6,6 +6,7 @@ import 'rxjs/add/operator/map';
 
 import { Regist } from "../classes/regist";
 import { Login } from "../classes/login";
+import { IdentityUserModel } from "../classes/identityUserModel";
 
 @Injectable()
 export class AccountService {
@@ -13,6 +14,14 @@ export class AccountService {
     private url = 'api/account';  // URL to web api
 
     constructor(private http: Http) { }
+
+    getIdentity(): Observable<IdentityUserModel> {
+        const myUrl: string = `${this.url}/getidentity`;
+        return this.http
+            .get(myUrl)
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
 
     registrate(reg: Regist): Observable<any> {
         const myUrl: string = `${this.url}/register`;
@@ -38,7 +47,7 @@ export class AccountService {
     }
 
     private handleError(error: Response | any): Observable<any> {
-        console.error('An error occurred', error); // for demo purposes only
+        console.error('An error occurred', error);
         return Observable.throw(error.message || error);
     }
 }

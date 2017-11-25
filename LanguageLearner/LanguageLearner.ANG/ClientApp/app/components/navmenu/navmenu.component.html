@@ -1,9 +1,9 @@
 ﻿<md-toolbar color="primary">
     <a md-button [routerLink]="['/home']" style="font-size: 20px;">Language Learner</a>
     <span class="spacer"></span>
-    <a md-button [routerLink]="['/questions']" [routerLinkActive]="['link-active']">Kérdéssor</a>
-    <a md-button [routerLink]="['/test']" [routerLinkActive]="['link-active']">Teszt</a>
-    <a md-button [routerLink]="['/regist']" [routerLinkActive]="['link-active']">Regisztráció</a>
-    <a md-button [routerLink]="['/login']" [routerLinkActive]="['link-active']">Bejelentkezés</a>
-    <a md-button (click)="logout()">Kijelentkezés</a>
+    <a md-button [routerLink]="['/questions']" [routerLinkActive]="['link-active']" *ngIf="isSignedIn == true">Kérdéssor</a>
+    <a md-button [routerLink]="['/test']" [routerLinkActive]="['link-active']" *ngIf="isSignedIn == true">Teszt</a>
+    <a md-button [routerLink]="['/regist']" [routerLinkActive]="['link-active']" *ngIf="isSignedIn == false">Regisztráció</a>
+    <a md-button [routerLink]="['/login']" [routerLinkActive]="['link-active']" *ngIf="isSignedIn == false">Bejelentkezés</a>
+    <a md-button (click)="logout()" *ngIf="isSignedIn == true">Kijelentkezés</a>
 </md-toolbar>
