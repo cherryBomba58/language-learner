@@ -3,28 +3,37 @@
 <div class="container">
     <div class="form-group">
         <md-input-container>
-            <input mdInput placeholder="Teljes név" />
+            <input mdInput placeholder="Teljes név" [(ngModel)]="regist.fullName"/>
         </md-input-container>
     </div>
     <div class="form-group">
         <md-input-container>
-            <input mdInput placeholder="Email" />
+            <input type="email" mdInput placeholder="Email" [(ngModel)]="regist.email"/>
         </md-input-container>
     </div>
     <div class="form-group">
         <md-input-container>
-            <input mdInput placeholder="Felhasználónév" />
+            <input mdInput placeholder="Felhasználónév" [(ngModel)]="regist.userName"/>
         </md-input-container>
     </div>
     <div class="form-group">
         <md-input-container>
-            <input mdInput placeholder="Jelszó" />
+            <input type="password" mdInput placeholder="Jelszó" [(ngModel)]="regist.password"/>
         </md-input-container>
     </div>
     <div class="form-group">
         <md-input-container>
-            <input mdInput placeholder="Jelszó még egyszer" />
+            <input type="password" mdInput placeholder="Jelszó még egyszer" [(ngModel)]="regist.confirmPassword"/>
         </md-input-container>
     </div>
-    <button md-raised-button color="primary">Regisztráció</button>
+    <button md-raised-button color="primary" (click)="registrate()">Regisztráció</button>
+
+    <div class="message" *ngIf="message">
+        <div class="text-danger" *ngIf="message?.succeeded == false">
+            <div *ngFor="let err of message?.errors">{{err.description}}</div>
+        </div>
+        <div class="text-success" *ngIf="message?.succeeded == true">
+            Sikerült a regisztráció!
+        </div>
+    </div>
 </div>

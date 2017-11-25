@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.1" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" />
   </ItemGroup>
 
@@ -36,6 +37,7 @@
     <None Remove="ClientApp\app\classes\questionTypesModel.ts" />
     <None Remove="ClientApp\app\classes\regist.ts" />
     <None Remove="ClientApp\app\components\task\task.component.ts" />
+    <None Remove="ClientApp\app\services\account.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,6 +54,7 @@
     <TypeScriptCompile Include="ClientApp\app\classes\regist.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\results\results.component.ts" />
     <TypeScriptCompile Include="ClientApp\app\components\task\task.component.ts" />
+    <TypeScriptCompile Include="ClientApp\app\services\account.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\learnable.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\course.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\services\shared-data.service.ts" />

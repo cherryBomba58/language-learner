@@ -26,3 +26,7 @@ textarea {
     color: #ff4081 !important;
     text-decoration: none !important;
 }
+
+.message {
+    padding-top: 10px;
+}

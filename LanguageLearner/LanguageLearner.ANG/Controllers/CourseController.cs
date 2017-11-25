@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using LanguageLearner.BLL.Managers;
 using LanguageLearner.BLL.Models;
 
-namespace LanguageLearner.WebAPI.Controllers
+namespace LanguageLearner.ANG.Controllers
 {
     [Route("api/[controller]")]
     public class CourseController : Controller

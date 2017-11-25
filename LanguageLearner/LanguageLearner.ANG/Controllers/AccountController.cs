@@ -16,20 +16,23 @@ using LanguageLearner.ANG.Models;
 namespace LanguageLearner.ANG.Controllers
 {
     [Authorize]
-    [Route("[controller]/[action]")]
+    [Route("api/[controller]/[action]")]
     public class AccountController : Controller
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger _logger;
 
         public AccountController(
             UserManager<User> userManager,
             SignInManager<User> signInManager,
+            RoleManager<IdentityRole> roleManager,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
             _logger = logger;
         }
 
@@ -50,7 +53,7 @@ namespace LanguageLearner.ANG.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login([FromBody]LoginViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
@@ -96,27 +99,34 @@ namespace LanguageLearner.ANG.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([FromBody]RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = model.Email, Email = model.Email };
+                await CreateRolesAsync();
+                var user = new User { UserName = model.UserName, Email = model.Email, FullName = model.FullName };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
+                    var roleResult = await _userManager.AddToRoleAsync(user, "Student");
+                    if (roleResult.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        return Json(result);
+                    }
+                    AddErrors(roleResult);
+                    return Json(roleResult);
                 }
                 AddErrors(result);
+                return Json(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return Json(model);
         }
 
         [HttpPost]
@@ -153,6 +163,20 @@ namespace LanguageLearner.ANG.Controllers
             else
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+        }
+
+        private async Task CreateRolesAsync()
+        {
+            IEnumerable<string> roles = new List<string> { "Teacher", "Student" };
+            foreach (var role in roles)
+            {
+                bool exists = await _roleManager.RoleExistsAsync(role);
+                if (!exists)
+                {
+                    var myRole = new IdentityRole() { Name = role };
+                    await _roleManager.CreateAsync(myRole);
+                }
             }
         }
 

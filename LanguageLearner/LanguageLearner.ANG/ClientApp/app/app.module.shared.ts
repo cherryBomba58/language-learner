@@ -18,6 +18,7 @@ import { ResultsComponent } from './components/results/results.component';
 import { CourseService } from './services/course.service';
 import { SharedDataService } from "./services/shared-data.service";
 import { LearnableService } from "./services/learnable.service";
+import { AccountService } from "./services/account.service";
 
 @NgModule({
     declarations: [
@@ -57,7 +58,8 @@ import { LearnableService } from "./services/learnable.service";
     providers: [
         CourseService,
         SharedDataService,
-        LearnableService
+        LearnableService,
+        AccountService
     ]
 })
 export class AppModuleShared {
