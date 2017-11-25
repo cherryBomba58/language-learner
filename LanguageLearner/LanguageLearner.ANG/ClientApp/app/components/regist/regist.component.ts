@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+﻿import { Component } from '@angular/core';
 
 import { AccountService } from '../../services/account.service';
 
@@ -20,7 +20,7 @@ export class RegistComponent {
                 this.message = res;
                 if (!this.message.succeeded && !this.message.errors) {
                     this.message.succeeded = false;
-                    this.message.errors = [{ description: "Something's wrong, for example, the two passwords are not the same, or they are too short, or some data is missing, or the email format is not valid." }];
+                    this.message.errors = [{ description: "Valami nem jó, például a két jelszó nem egyezik meg, vagy túl rövidek, vagy néhány adat hiányzik, vagy az email formátuma nem helyes." }];
                 }
             });
     }

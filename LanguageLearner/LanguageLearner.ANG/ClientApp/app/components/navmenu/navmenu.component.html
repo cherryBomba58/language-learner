@@ -5,5 +5,5 @@
     <a md-button [routerLink]="['/test']" [routerLinkActive]="['link-active']">Teszt</a>
     <a md-button [routerLink]="['/regist']" [routerLinkActive]="['link-active']">Regisztráció</a>
     <a md-button [routerLink]="['/login']" [routerLinkActive]="['link-active']">Bejelentkezés</a>
-    <a md-button>Kijelentkezés</a>
+    <a md-button (click)="logout()">Kijelentkezés</a>
 </md-toolbar>

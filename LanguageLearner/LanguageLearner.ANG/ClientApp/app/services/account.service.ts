@@ -5,6 +5,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { Regist } from "../classes/regist";
+import { Login } from "../classes/login";
 
 @Injectable()
 export class AccountService {
@@ -18,6 +19,21 @@ export class AccountService {
         return this.http
             .post(myUrl, JSON.stringify({ FullName: reg.fullName, Email: reg.email, UserName: reg.userName, Password: reg.password, ConfirmPassword: reg.confirmPassword }), { headers: this.headers })
             .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    login(log: Login): Observable<any> {
+        const myUrl: string = `${this.url}/login`;
+        return this.http
+            .post(myUrl, JSON.stringify({ UserName: log.userName, Password: log.password, RememberMe: log.rememberMe }), { headers: this.headers })
+            .map(res => res.json())
+            .catch(this.handleError);
+    }
+
+    logout(): Observable<any> {
+        const myUrl: string = `${this.url}/logout`;
+        return this.http
+            .post(myUrl, JSON.stringify({ }), { headers: this.headers })
             .catch(this.handleError);
     }
 
