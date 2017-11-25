@@ -29,7 +29,7 @@ namespace LanguageLearner.WPF.Menu
             InitializeComponent();
             this.DataContext = this;
 
-            initCourses();
+            InitCourses();
         }
 
         public void UtilizeState(object state)
@@ -52,26 +52,41 @@ namespace LanguageLearner.WPF.Menu
 
 
 
-        public List<String> courseList
+        public List<CourseModel> CourseList
         {
-            get { return (List<String>)GetValue(courseListProperty); }
-            set { SetValue(courseListProperty, value); }
+            get { return (List<CourseModel>)GetValue(CourseListProperty); }
+            set { SetValue(CourseListProperty, value); }
         }
 
         // Using a DependencyProperty as the backing store for MyProperty.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty courseListProperty =
-            DependencyProperty.Register("MyProperty", typeof(List<String>), typeof(CourseOverview), new PropertyMetadata(new List<String>()));
+        public static readonly DependencyProperty CourseListProperty =
+            DependencyProperty.Register("CourseList", typeof(List<CourseModel>), typeof(CourseOverview), new PropertyMetadata(new List<CourseModel>()));
+
+
+
+        public CourseModel SelectedCourse
+        {
+            get { return (CourseModel)GetValue(SelectedCourseProperty); }
+            set { SetValue(SelectedCourseProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for selectedCourse.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty SelectedCourseProperty =
+            DependencyProperty.Register("SelectedCourse", typeof(CourseModel), typeof(CourseOverview), new PropertyMetadata(null));
+
+
         #endregion
 
 
-        private void initCourses()
+        #region API access
+        private void InitCourses()
         {
-            courseList = new List<string>();
+            SelectedCourse = null;
+            List<CourseModel> currentCourses = new List<CourseModel>();
 
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:57696/");
-
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 HttpResponseMessage response = client.GetAsync("api/course").Result;
@@ -82,30 +97,76 @@ namespace LanguageLearner.WPF.Menu
 
                     foreach (var course in courses)
                     {
-                        courseList.Add(course.Name);
+                        currentCourses.Add(course);
                     }
                 }
             }
+
+            CourseList = currentCourses;
         }
 
         private void AddCourse_Click(object sender, RoutedEventArgs e)
         {
+            if (!IsAvailableCourseName())
+            {
+                MessageBox.Show("Már van ilyen nevű kurzus.", "Kurzusfelvétel hiba");
+                return;
+            }
+
+
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("http://localhost:57696/");
-
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 CourseModel newCourse = new CourseModel();
                 newCourse.Name = NewCourseName;
                 var content = new StringContent(newCourse.ToString(), Encoding.UTF8, "application/json");
 
-                HttpResponseMessage response = client.PostAsync("api/course",content).Result;
+                HttpResponseMessage response = client.PostAsJsonAsync("api/course", newCourse).Result;
                 if (response.IsSuccessStatusCode)
                 {
-                    initCourses();
+                    InitCourses();
+                    NewCourseName = "";
+                }
+                else
+                {
+                    MessageBox.Show("Váratlan hiba történt, a kurzusfelvétel nem sikerült. Kérjük, próbálja később!", "Kurzusfelvétel hiba");
                 }
             }
+        }
+
+        private void DeleteCourse_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCourse == null)
+            {
+                MessageBox.Show("Nincs egyetlen kurzus se kiválasztva.", "Kurzustörlés hiba");
+                return;
+            }
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("http://localhost:57696/");
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                HttpResponseMessage response = client.DeleteAsync("api/course/" + SelectedCourse.CourseID).Result;
+                if (response.IsSuccessStatusCode)
+                {
+                    InitCourses();
+                }
+                else
+                {
+                    MessageBox.Show("Váratlan hiba történt, a kurzus törlése nem sikerült. Kérjük, próbálja később!", "Kurzustörlés hiba");
+                }
+            }
+        }
+
+        #endregion
+
+        private bool IsAvailableCourseName()
+        {
+            return !String.IsNullOrEmpty(NewCourseName) &&
+                !CourseList.Select(c => c.Name).ToList().Contains(NewCourseName);
         }
 
 
@@ -129,8 +190,7 @@ namespace LanguageLearner.WPF.Menu
         {
             System.Windows.Application.Current.Shutdown();
         }
-        #endregion
 
-        
+        #endregion
     }
 }
