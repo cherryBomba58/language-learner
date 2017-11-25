@@ -6,8 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using LanguageLearner.BLL.Managers;
 using LanguageLearner.BLL.Models;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace LanguageLearner.ANG.Controllers
 {
     [Route("api/[controller]")]
@@ -20,37 +18,44 @@ namespace LanguageLearner.ANG.Controllers
             _manager = manager;
         }
 
-        // GET: api/values
+        // GET api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            IEnumerable<LearnableModel> learneables = _manager.GetLearnables();
+            return Json(learneables);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
-            IEnumerable<LearnableModel> learnables = _manager.GetLearnables(id);
+            IEnumerable<LearnableModel> learnables = _manager.GetLearnablesByCourseId(id);
             return Json(learnables);
         }
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public IActionResult Post([FromBody]LearnableModel model)
         {
+            _manager.AddLearnable(model);
+            return Json("OK");
         }
 
         // PUT api/values/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody]LearnableModel model)
         {
+            _manager.PutLearnable(id, model);
+            return Json("OK");
         }
 
         // DELETE api/values/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _manager.DeleteLearnable(id);
+            return Json("OK");
         }
     }
 }

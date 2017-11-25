@@ -41,7 +41,7 @@ namespace LanguageLearner.BLL.Managers
 
         public void AddCourse(CourseModel model)
         {
-            // ID-t majd kap, ha bevettük az adatbázisba
+            // It will get ID automatically in the DB
             var course = new Course
             {
                 Name = model.Name
@@ -52,8 +52,7 @@ namespace LanguageLearner.BLL.Managers
 
         public void PutCourse(int id, CourseModel model)
         {
-            // itt már egy megadott ID alapján keresünk egy kurzust,
-            // és azt módosítjuk
+            // Search by the given ID the modify
             var course = _context.Courses.Single(c => c.CourseID == id);
             course.Name = model.Name;
             _context.SaveChanges();
@@ -61,6 +60,7 @@ namespace LanguageLearner.BLL.Managers
 
         public void DeleteCourse(int id)
         {
+            // Search by the given ID then delete
             var course = _context.Courses.Single(c => c.CourseID == id);
             _context.Courses.Remove(course);
             _context.SaveChanges();

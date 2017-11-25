@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="525">
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <Label Content="Válassz kurzust:" HorizontalAlignment="Left" Margin="23,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.372,-0.559"/>
-        <ComboBox HorizontalAlignment="Left" Margin="23,100,0,0" VerticalAlignment="Top" Width="133"  ItemsSource="{Binding CourseList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCourse, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Height="26" />
+        <ComboBox HorizontalAlignment="Left" Margin="23,100,0,0" VerticalAlignment="Top" Width="133"  ItemsSource="{Binding CourseList}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedCourse}" SelectionChanged="SelectedCourse_Changed" Height="26" />
         <Border Background="#6a2eb5" BorderThickness="0" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="525">
             <Button Content="Kurzusok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="CoursesMenu_Click" Height="36" Margin="276,0,0,0"/>
         </Border>
@@ -20,12 +20,20 @@
         </Border>
         <Label Content="Kurzusok" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="92" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,36,0,0"/>
         <Label Content="Adj hozzá új kurzust:" HorizontalAlignment="Left" Margin="302,74,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.372,-0.559"/>
-        <TextBox HorizontalAlignment="Left" Height="26" Margin="307,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Text="{Binding NewCourseName}"/>
+        <TextBox HorizontalAlignment="Left" Height="26" Margin="307,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="135" Text="{Binding NewCourse.Name}"/>
         <Button Content="Hozzáad" HorizontalAlignment="Left" Margin="442,100,0,0" VerticalAlignment="Top" Width="75" Height="26" Click="AddCourse_Click"/>
-        <ListBox HorizontalAlignment="Left" Height="120" Margin="23,139,0,0" VerticalAlignment="Top" Width="213"/>
-        <Button Content="Új szó felvétele" HorizontalAlignment="Left" Margin="254,141,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Content="Szó szerkesztése" HorizontalAlignment="Left" Margin="254,166,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Content="Szó törlése" HorizontalAlignment="Left" Margin="254,214,0,0" VerticalAlignment="Top" Width="126"/>
-        <Button Content="Kategória törlése" HorizontalAlignment="Left" Margin="254,239,0,0" VerticalAlignment="Top" Width="126" Click="DeleteCourse_Click"/>
+        <Button Content="Új szó felvétele" HorizontalAlignment="Left" Margin="389,141,0,0" VerticalAlignment="Top" Width="126" Click="NewLearnable_Click"/>
+        <Button Content="Szó szerkesztése" HorizontalAlignment="Left" Margin="389,166,0,0" VerticalAlignment="Top" Width="126" Click="EditLearnable_Click"/>
+        <Button Content="Szó törlése" HorizontalAlignment="Left" Margin="389,207,0,0" VerticalAlignment="Top" Width="126" Click="DeleteLearnable_Click"/>
+        <Button Content="Kurzus törlése" HorizontalAlignment="Left" Margin="389,232,0,0" VerticalAlignment="Top" Width="126" Click="DeleteCourse_Click"/>
+        <DataGrid HorizontalAlignment="Left" Margin="23,138,0,48" VerticalAlignment="Stretch" Width="347" ItemsSource="{Binding Learnables}" 
+                  AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True" SelectedItem="{Binding SelectedLearnable}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Angol szó" Binding="{Binding Path=English}"/>
+                <DataGridTextColumn Header="Magyar szó" Binding="{Binding Path=Hungarian}"/>
+                <DataGridTextColumn Header="Szófaj" Binding="{Binding Path=WordClass}"/>
+                <DataGridTextColumn Header="Kép URL" Binding="{Binding Path=PictureUrl}" Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

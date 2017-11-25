@@ -35,12 +35,6 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // POST api/values
-        // A CourseModel nem tartalmazza  Learnable-k listáját,
-        // a Learnable-ket viszont érdemes másik kontrollerben (LearnableController),
-        // másik Post-ban küldeni az adatbázis felé, akár Learnable-k tömbjét is
-        // (az is lehet külön LearnableListModel, amely csak  Learnable-k listáját tartalmazza),
-        // és azoknak megadni a kurzusuk kulcsát, az ő külső kulcsukként.
-        // A CourseModel id-jára sincs most szükség, csak szemléltetés, hogy modelleket kell itt is alkalmazni.
         [HttpPost]
         public IActionResult Post([FromBody]CourseModel model)
         {
