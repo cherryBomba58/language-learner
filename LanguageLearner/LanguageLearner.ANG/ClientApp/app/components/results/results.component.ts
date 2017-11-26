@@ -1,6 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 
 import { Course } from "../../classes/course";
 import { QuestionType } from "../../classes/questionType";
@@ -21,13 +22,18 @@ export class ResultsComponent implements OnInit {
 
     constructor(
         private route: ActivatedRoute,
+        private router: Router,
         private sharedDataService: SharedDataService
     ) { }
 
     ngOnInit() {
         this.courseID = +this.route.snapshot.params['courseid'];
+        this.courseName = this.sharedDataService.getCourseName();
         this.qtype = this.sharedDataService.getQuestionType();
         this.answerlist = this.sharedDataService.getAnswers();
-        this.courseName = this.sharedDataService.getCourseName();
+    }
+
+    goBack() {
+        this.router.navigate(['/questions']);
     }
 }

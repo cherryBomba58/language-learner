@@ -7,6 +7,7 @@ namespace LanguageLearner.BLL.Models
     public class AnswerModel
     {
         public int LearnableID { get; set; }
+        public string OriginalWord { get; set; }
         public string GoodAnswer { get; set; }
         public string Answer { get; set; }
         public bool Right { get; set; }

@@ -11,7 +11,7 @@
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.hungarian, learnable.english, $event)"/>
             </md-input-container>
         </div>
     </div>
@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.hungarian, $event)"/>
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, learnable.hungarian, $event)"/>
             </md-input-container>
         </div>
     </div>
@@ -31,7 +31,7 @@
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.pictureUrl, learnable.english, $event)"/>
             </md-input-container>
         </div>
     </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="col-md-6">
                 <md-input-container>
-                    <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
+                    <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.hungarian, learnable.english, $event)"/>
                 </md-input-container>
             </div>
         </div>

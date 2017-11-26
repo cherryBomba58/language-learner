@@ -46,9 +46,9 @@ export class TaskComponent implements OnInit {
         this.courseName = this.sharedDataService.getCourseName();
     }
 
-    addAnswer(i: number, learnableID: number, goodAnswer: string, event: any) {
+    addAnswer(i: number, learnableID: number, originalWord: string, goodAnswer: string, event: any) {
         let right = (goodAnswer.valueOf().toLowerCase() === event.valueOf().toLowerCase()) ? true : false;
-        this.answerarray[i] = new Answer(learnableID, goodAnswer, event, right);
+        this.answerarray[i] = new Answer(learnableID, originalWord, goodAnswer, event, right);
     }
 
     stop() {
