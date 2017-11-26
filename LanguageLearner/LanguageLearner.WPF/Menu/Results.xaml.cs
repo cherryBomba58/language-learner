@@ -56,8 +56,7 @@ namespace LanguageLearner.WPF.Menu
 
         }
         #endregion
-
-
+        
         #region Menu changes
         private void CoursesMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -71,6 +70,9 @@ namespace LanguageLearner.WPF.Menu
 
         private void LogoutMenu_Click(object sender, RoutedEventArgs e)
         {
+            HttpHelpers.Username = "";
+            HttpHelpers.Password = "";
+
             Switcher.Switch(new Login());
         }
 

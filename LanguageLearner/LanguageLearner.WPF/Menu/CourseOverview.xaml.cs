@@ -278,6 +278,9 @@ namespace LanguageLearner.WPF.Menu
 
         private void LogoutMenu_Click(object sender, RoutedEventArgs e)
         {
+            HttpHelpers.Username = "";
+            HttpHelpers.Password = "";
+
             Switcher.Switch(new Login());
         }
 

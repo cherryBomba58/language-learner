@@ -8,8 +8,8 @@
              d:DesignHeight="300" d:DesignWidth="525">
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
         <Button Content="Bejelentkezés" Margin="215,207,210,68" Click="Login_Click" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Background="#6a2eb5" BorderBrush="{x:Null}"/>
-        <TextBox Margin="239,104,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
-        <TextBox Margin="239,155,0,0" TextWrapping="Wrap" Text="" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
+        <TextBox Margin="239,104,0,0" TextWrapping="Wrap" Text="{Binding Username}" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="Password" Margin="239,155,0,0" HorizontalAlignment="Left" Width="120" Height="23" VerticalAlignment="Top"/>
         <Label Content="Felhasználó:" Margin="163,101,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="74"/>
         <Label Content="Jelszó:" Margin="193,152,0,0" Height="26" VerticalAlignment="Top" HorizontalAlignment="Left" Width="44"/>
         <Border Background="#6a2eb5" BorderThickness="0" Height="36" VerticalAlignment="Top"/>

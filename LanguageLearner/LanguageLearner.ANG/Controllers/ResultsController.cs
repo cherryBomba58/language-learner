@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LanguageLearner.BLL.Managers;
 using LanguageLearner.BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LanguageLearner.ANG.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ResultsController : Controller
     {
@@ -19,6 +21,7 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // GET api/values
+        [Authorize(Roles = "Teacher")]
         [HttpGet]
         public IActionResult Get()
         {

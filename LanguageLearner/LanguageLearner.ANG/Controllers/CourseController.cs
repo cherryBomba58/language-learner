@@ -5,9 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LanguageLearner.BLL.Managers;
 using LanguageLearner.BLL.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LanguageLearner.ANG.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class CourseController : Controller
     {
@@ -35,6 +37,7 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // POST api/values
+        [Authorize(Roles = "Teacher")]
         [HttpPost]
         public IActionResult Post([FromBody]CourseModel model)
         {
@@ -43,6 +46,7 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // PUT api/values/5
+        [Authorize(Roles = "Teacher")]
         [HttpPut("{id}")]
         public IActionResult Put(int id, [FromBody]CourseModel model)
         {
@@ -51,6 +55,7 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // DELETE api/values/5
+        [Authorize(Roles = "Teacher")]
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
