@@ -22,14 +22,16 @@ namespace LanguageLearner.ANG.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok();
+            IEnumerable<UsersCourseResultModel> usersCourseResults = _manager.GetUsersCourseResults();
+            return Json(usersCourseResults);
         }
 
         // GET api/values/5
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public IActionResult Get(string id)
         {
-            return Ok();
+            IEnumerable<UsersCourseResultModel> usersCourseResults = _manager.GetUsersCourseResults(id);
+            return Json(usersCourseResults);
         }
 
         // POST api/values

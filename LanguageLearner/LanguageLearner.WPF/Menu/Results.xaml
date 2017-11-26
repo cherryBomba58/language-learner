@@ -14,8 +14,8 @@
             <Button Content="Kurzusok" HorizontalAlignment="Left" VerticalAlignment="Top" Width="75" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="CoursesMenu_Click" Height="36" Margin="276,0,0,0"/>
         </Border>
         <Label Content="Language Learner" HorizontalAlignment="Left" Height="36" VerticalAlignment="Top" Width="156" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Button Content="Személyes" HorizontalAlignment="Left" Margin="352,0,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="ProfileMenu_Click" RenderTransformOrigin="0.556,-0.526" Height="36"/>
+        <Button Content="Eredmények" HorizontalAlignment="Left" Margin="352,0,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="ProfileMenu_Click" RenderTransformOrigin="0.556,-0.526" Height="36"/>
         <Button Content="Kijelentkezés" HorizontalAlignment="Left" Margin="440,0,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="LogoutMenu_Click" Height="36"/>
-        <Label Content="Adataim" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="92" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,36,0,0"/>
+        <Label Content="Eredmények" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="92" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,36,0,0"/>
     </Grid>
 </UserControl>

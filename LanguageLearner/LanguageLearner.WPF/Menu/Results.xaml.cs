@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LanguageLearner.BLL.Models;
+using LanguageLearner.WPF.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +28,8 @@ namespace LanguageLearner.WPF.Menu
         public Profile()
         {
             InitializeComponent();
+
+            InitUserResults();
         }
 
         public void UtilizeState(object state)
@@ -32,7 +37,26 @@ namespace LanguageLearner.WPF.Menu
             throw new NotImplementedException();
         }
         #endregion
-        
+
+        #region API access
+        private void InitUserResults()
+        {
+
+            List<UsersCourseResultModel> currenResults = new List<UsersCourseResultModel>();
+
+            using (var client = HttpHelpers.InitializeHttpClient())
+            {
+                HttpResponseMessage response = client.GetAsync("api/result").Result;
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a kuzusok lekérdezése nem sikerült. Kérjük, próbálja később!"))
+                {
+                    currenResults = response.Content.ReadAsAsync<IEnumerable<UsersCourseResultModel>>().Result.ToList();
+                }
+            }
+
+
+        }
+        #endregion
+
 
         #region Menu changes
         private void CoursesMenu_Click(object sender, RoutedEventArgs e)

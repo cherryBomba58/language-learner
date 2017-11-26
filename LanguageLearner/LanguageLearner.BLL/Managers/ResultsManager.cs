@@ -20,6 +20,38 @@ namespace LanguageLearner.BLL.Managers
             _context = context;
         }
 
+        public IEnumerable<UsersCourseResultModel> GetUsersCourseResults()
+        {
+            List<UsersCourseResultModel> results = new List<UsersCourseResultModel>();
+            foreach(var user in _context.Users)
+            {
+                results.AddRange(user.CourseResultsList.Select(r => new UsersCourseResultModel
+                {
+                    FullName = user.FullName,
+                    UserID = user.Id,
+                    CourseID = r.CourseID,
+                    Date = r.Date,
+                    Points = r.Points
+                }));
+            }
+            return results;
+        }
+
+        public List<UsersCourseResultModel> GetUsersCourseResults(String id)
+        {
+            List<UsersCourseResultModel> results = new List<UsersCourseResultModel>();
+            var user = _context.Users.Single(u => u.Id == id);
+            results.AddRange(user.CourseResultsList.Select(r => new UsersCourseResultModel
+            {
+                FullName = user.FullName,
+                UserID = user.Id,
+                CourseID = r.CourseID,
+                Date = r.Date,
+                Points = r.Points
+            }));
+            return results;
+        }
+
         public void AddResults(ResultsModel model, string username)
         {
             var courseResult = new CourseResults

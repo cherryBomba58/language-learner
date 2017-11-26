@@ -9,19 +9,21 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using LanguageLearner.BLL.Models;
+using LanguageLearner.WPF.Helpers;
 
 namespace LanguageLearner.WPF.Menu
 {
     /// <summary>
     /// Interaction logic for CourseOverview.xaml
     /// </summary>
-    public partial class CourseOverview : UserControl, ISwitchable
+    public partial class CourseOverview : System.Windows.Controls.UserControl, ISwitchable
     {
         #region Constructor
         public CourseOverview()
@@ -37,7 +39,6 @@ namespace LanguageLearner.WPF.Menu
             throw new NotImplementedException();
         }
         #endregion
-
 
         #region Properties
         public CourseModel NewCourse
@@ -95,16 +96,15 @@ namespace LanguageLearner.WPF.Menu
         
         #endregion
 
-
         #region API access
         private void InitCoursesList()
         {
             List<CourseModel> currentCourses = new List<CourseModel>();
 
-            using (var client = InitializeHttpClient())
+            using (var client = HttpHelpers.InitializeHttpClient())
             {
                 HttpResponseMessage response = client.GetAsync("api/course").Result;
-                if (IsSuccessfullRequest(response, "Váratlan hiba történt, a kuzusok lekérdezése nem sikerült. Kérjük, próbálja később!"))
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a kuzusok lekérdezése nem sikerült. Kérjük, próbálja később!"))
                 {
                     currentCourses = response.Content.ReadAsAsync<IEnumerable<CourseModel>>().Result.ToList();
                 }
@@ -130,10 +130,10 @@ namespace LanguageLearner.WPF.Menu
 
             List<LearnableModel> currentLearnables = new List<LearnableModel>();
 
-            using (var client = InitializeHttpClient())
+            using (var client = HttpHelpers.InitializeHttpClient())
             {
                 HttpResponseMessage response = client.GetAsync("api/learnable/" + SelectedCourse.CourseID).Result;
-                if (IsSuccessfullRequest(response, "Váratlan hiba történt, a szavak lekérdezése nem sikerült. Kérjük, próbálja később!"))
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a szavak lekérdezése nem sikerült. Kérjük, próbálja később!"))
                 {
                     currentLearnables = response.Content.ReadAsAsync<IEnumerable<LearnableModel>>().Result.ToList();
                 }
@@ -151,14 +151,14 @@ namespace LanguageLearner.WPF.Menu
         {
             if (!IsAvailableCourseName())
             {
-                MessageBox.Show("Már van ilyen nevű kurzus.", "Kurzusfelvétel hiba");
+                System.Windows.Forms.MessageBox.Show("Már van ilyen nevű kurzus.", "Kurzusfelvétel hiba");
                 return;
             }
 
-            using (var client = InitializeHttpClient())
+            using (var client = HttpHelpers.InitializeHttpClient())
             {
                 HttpResponseMessage response = client.PostAsJsonAsync("api/course", NewCourse).Result;
-                if (IsSuccessfullRequest(response, "Váratlan hiba történt, a kurzusfelvétel nem sikerült. Kérjük, próbálja később!"))
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a kurzusfelvétel nem sikerült. Kérjük, próbálja később!"))
                 {
                     InitCoursesList();
                     NewCourse = new CourseModel();
@@ -170,14 +170,22 @@ namespace LanguageLearner.WPF.Menu
         {
             if (SelectedCourse == null)
             {
-                MessageBox.Show("Nincs egyetlen kurzus se kiválasztva.", "Kurzustörlés hiba");
+                System.Windows.Forms.MessageBox.Show("Nincs egyetlen kurzus se kiválasztva.", "Kurzustörlés hiba");
                 return;
             }
 
-            using (var client = InitializeHttpClient())
+            if (Learnables != null && Learnables.Count > 0)
+            {
+                DialogResult result = System.Windows.Forms.MessageBox.Show(
+                    "A kuzushoz tartozó szavak törölve lesznek. Biztos, hogy folytatja?", "Kurzus törlése", MessageBoxButtons.OKCancel);
+                if (result == DialogResult.Cancel)
+                    return;
+            }
+
+            using (var client = HttpHelpers.InitializeHttpClient())
             {
                 HttpResponseMessage response = client.DeleteAsync("api/course/" + SelectedCourse.CourseID).Result;
-                if (IsSuccessfullRequest(response, "Váratlan hiba történt, a kurzus törlése nem sikerült. Kérjük, próbálja később!"))
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a kurzus törlése nem sikerült. Kérjük, próbálja később!"))
                 {
                     SelectedCourse = null;
                     InitCoursesList();
@@ -194,10 +202,10 @@ namespace LanguageLearner.WPF.Menu
                 if (dialog.Word == null)
                     return;
 
-                using (var client = InitializeHttpClient())
+                using (var client = HttpHelpers.InitializeHttpClient())
                 {
                     HttpResponseMessage response = client.PostAsJsonAsync("api/learnable", dialog.Word).Result;
-                    if (IsSuccessfullRequest(response, "Váratlan hiba történt, a szó felvétele nem sikerült. Kérjük, próbálja később!"))
+                    if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a szó felvétele nem sikerült. Kérjük, próbálja később!"))
                     {
                         InitLearnablesList();
                     }
@@ -209,7 +217,7 @@ namespace LanguageLearner.WPF.Menu
         {
             if (SelectedLearnable == null)
             {
-                MessageBox.Show("Nincs kiválasztva a szó, amit szerkeszteni szeretnél!", "Szószerkesztés hiba");
+                System.Windows.Forms.MessageBox.Show("Nincs kiválasztva a szó, amit szerkeszteni szeretnél!", "Szószerkesztés hiba");
                 return;
             }
 
@@ -219,10 +227,10 @@ namespace LanguageLearner.WPF.Menu
                 if (dialog.Word == null)
                     return;
 
-                using (var client = InitializeHttpClient())
+                using (var client = HttpHelpers.InitializeHttpClient())
                 {
                     HttpResponseMessage response = client.PutAsJsonAsync("api/learnable/" + dialog.Word.LearnableID, dialog.Word).Result;
-                    if (IsSuccessfullRequest(response, "Váratlan hiba történt, a szó módosítása nem sikerült. Kérjük, próbálja később!"))
+                    if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a szó módosítása nem sikerült. Kérjük, próbálja később!"))
                     {
                         InitLearnablesList();
                     }
@@ -234,14 +242,14 @@ namespace LanguageLearner.WPF.Menu
         {
             if (SelectedLearnable == null)
             {
-                MessageBox.Show("Nincs kiválasztva a szó, amit törölni szeretnél!", "Szótörlés hiba");
+                System.Windows.Forms.MessageBox.Show("Nincs kiválasztva a szó, amit törölni szeretnél!", "Szótörlés hiba");
                 return;
             }
 
-            using (var client = InitializeHttpClient())
+            using (var client = HttpHelpers.InitializeHttpClient())
             {
                 HttpResponseMessage response = client.DeleteAsync("api/learnable/" + SelectedLearnable.LearnableID).Result;
-                if (IsSuccessfullRequest(response, "Váratlan hiba történt, a szó törlése nem sikerült. Kérjük, próbálja később!"))
+                if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a szó törlése nem sikerült. Kérjük, próbálja később!"))
                 {
                     InitLearnablesList();
                 }
@@ -250,32 +258,13 @@ namespace LanguageLearner.WPF.Menu
         #endregion
 
         #region Helpers
-        private static HttpClient InitializeHttpClient()
-        {
-            var client = new HttpClient();
-
-            client.BaseAddress = new Uri("http://localhost:57696/");
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            return client;
-        }
-
-        private static bool IsSuccessfullRequest(HttpResponseMessage response, String ErrorMessage)
-        {
-            bool success = response.IsSuccessStatusCode;
-            if (!success)
-                MessageBox.Show(ErrorMessage, "Probléma a szerkesztésben");
-
-            return success;
-        }
-
         private bool IsAvailableCourseName()
         {
             return !String.IsNullOrEmpty(NewCourse.Name) &&
                 !CourseList.Select(c => c.Name).ToList().Contains(NewCourse.Name);
         }
         #endregion
-        
+
         #region Menu changes
         private void CoursesMenu_Click(object sender, RoutedEventArgs e)
         {
