@@ -10,5 +10,7 @@ namespace LanguageLearner.DAL.Entities
         public int LearnableID { get; set; }
         public int RightAnswerNum { get; set; }
         public int WrongAnswerNum { get; set; }
+
+        public User User { get; set; }
     }
 }

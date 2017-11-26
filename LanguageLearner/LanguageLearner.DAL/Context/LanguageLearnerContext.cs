@@ -25,10 +25,22 @@ namespace LanguageLearner.DAL.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<User>()
+                .HasAlternateKey(u => u.UserName);
             modelBuilder.Entity<CourseResults>().ToTable("CourseResults")
-                .HasKey(c => new { c.UserID, c.CourseID, c.Date});
+                .HasKey(c => new { c.UserID, c.CourseID, c.Date });
+            modelBuilder.Entity<CourseResults>()
+                .HasOne(c => c.User)
+                .WithMany(u => u.CourseResultsList)
+                .HasForeignKey(c => c.UserID)
+                .HasPrincipalKey(u => u.UserName);                
             modelBuilder.Entity<LearnableResults>().ToTable("LearnableResults")
                 .HasKey(l => new { l.UserID, l.LearnableID });
+            modelBuilder.Entity<LearnableResults>()
+                .HasOne(l => l.User)
+                .WithMany(u => u.LearnableResultsList)
+                .HasForeignKey(l => l.UserID)
+                .HasPrincipalKey(u => u.UserName);
         }
 
     }

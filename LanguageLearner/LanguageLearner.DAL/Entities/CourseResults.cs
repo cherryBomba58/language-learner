@@ -10,5 +10,7 @@ namespace LanguageLearner.DAL.Entities
         public int CourseID { get; set; }
         public DateTime Date { get; set; }
         public int Points { get; set; }
+
+        public User User { get; set; }
     }
 }

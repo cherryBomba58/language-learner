@@ -5,11 +5,13 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 import { QuestionType } from "../classes/questionType";
+import { Answer } from "../classes/answer";
 
 @Injectable()
 export class SharedDataService {
     qtype: QuestionType;
     courseName: string;
+    answerArray: Answer[];
 
     getQuestionType() {
         return this.qtype;
@@ -25,5 +27,13 @@ export class SharedDataService {
 
     setCourseName(name: string) {
         this.courseName = name;
+    }
+
+    getAnswers() {
+        return this.answerArray;
+    }
+
+    setAnswers(array: Answer[]) {
+        this.answerArray = array;
     }
 }

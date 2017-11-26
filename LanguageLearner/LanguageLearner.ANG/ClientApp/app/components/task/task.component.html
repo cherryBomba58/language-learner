@@ -4,14 +4,14 @@
 
 <h4>Lecke: {{courseName}}</h4>
 
-<div *ngFor="let learnable of learnablelist | async">
-    <div *ngIf="qtype==0 || qtype==3 || qtype==4" class="row form-group">
+<div *ngFor="let learnable of learnablelist | async; let i=index">
+    <div *ngIf="qtype==0 || qtype==4" class="row form-group">
         <div class="col-md-3 col-md-offset-3">
             <md-card>{{learnable.hungarian}}</md-card>
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput />
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
             </md-input-container>
         </div>
     </div>
@@ -21,25 +21,44 @@
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput />
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.hungarian, $event)"/>
             </md-input-container>
         </div>
     </div>
     <div *ngIf="qtype==2" class="row form-group">
         <div class="col-md-3 col-md-offset-3">
-            <md-card>{{learnable.pictureUrl}}</md-card>
+            <md-card><img src="{{learnable.pictureUrl}}" alt="{{learnable.pictureUrl}}" class="foto"/></md-card>
         </div>
         <div class="col-md-3">
             <md-input-container>
-                <input mdInput />
+                <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
             </md-input-container>
         </div>
+    </div>
+</div>
+<div *ngIf="qtype==3">
+    <div class="col-md-6 col-md-offset-1">
+        <div *ngFor="let learnable of learnablelist | async; let i=index" class="row form-group">
+            <div class="col-md-6">
+                <md-card>{{learnable.hungarian}}</md-card>
+            </div>
+            <div class="col-md-6">
+                <md-input-container>
+                    <input mdInput [ngModel]="answerarray[i]?.answer" (ngModelChange)="addAnswer(i, learnable.learnableID, learnable.english, $event)"/>
+                </md-input-container>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <md-card>
+            <p *ngFor="let learnable of learnablelist | async">{{learnable.english}}</p>
+        </md-card>
     </div>
 </div>
 
 <div class="row">
     <div class="col-md-3 col-md-offset-9">
-        <button md-raised-button color="warn" *ngIf="qtype!=4">Abbahagyás</button>
-        <button md-raised-button color="primary">Kész</button>
+        <button md-raised-button color="warn" *ngIf="qtype!=4" (click)="stop()">Abbahagyás</button>
+        <button md-raised-button color="primary" (click)="showResults()">Kész</button>
     </div>
 </div>

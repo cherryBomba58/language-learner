@@ -30,3 +30,8 @@ textarea {
 .message {
     padding-top: 10px;
 }
+
+.foto {
+    max-width: 135px;
+    height: 135px;
+}
