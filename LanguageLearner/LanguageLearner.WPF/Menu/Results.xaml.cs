@@ -2,6 +2,7 @@
 using LanguageLearner.WPF.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -21,13 +22,15 @@ namespace LanguageLearner.WPF.Menu
     /// <summary>
     /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class Profile : UserControl, ISwitchable
+    public partial class Results : UserControl, ISwitchable
     {
 
         #region Constructor
-        public Profile()
+        public Results()
         {
             InitializeComponent();
+
+            this.DataContext = this;
 
             InitUserResults();
         }
@@ -53,11 +56,12 @@ namespace LanguageLearner.WPF.Menu
                 }
             }
 
-
+            ICollectionView ResultsList = CollectionViewSource.GetDefaultView(currenResults);
+            ResultsList.GroupDescriptions.Add(new PropertyGroupDescription("FullName"));
+            ResultsDataGrid.DataContext = ResultsList;
         }
         #endregion
-
-
+        
         #region Menu changes
         private void CoursesMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -66,11 +70,14 @@ namespace LanguageLearner.WPF.Menu
 
         private void ProfileMenu_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Profile());
+            Switcher.Switch(new Results());
         }
 
         private void LogoutMenu_Click(object sender, RoutedEventArgs e)
         {
+            HttpHelpers.Username = "";
+            HttpHelpers.Password = "";
+
             Switcher.Switch(new Login());
         }
 

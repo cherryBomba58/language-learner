@@ -29,7 +29,7 @@ namespace LanguageLearner.BLL.Managers
                 {
                     FullName = user.FullName,
                     UserID = user.Id,
-                    CourseID = r.CourseID,
+                    CourseName = _context.Courses.Single(c => c.CourseID == r.CourseID).Name,
                     Date = r.Date,
                     Points = r.Points
                 }));
@@ -45,7 +45,7 @@ namespace LanguageLearner.BLL.Managers
             {
                 FullName = user.FullName,
                 UserID = user.Id,
-                CourseID = r.CourseID,
+                CourseName = _context.Courses.Single(c => c.CourseID == r.CourseID).Name,
                 Date = r.Date,
                 Points = r.Points
             }));

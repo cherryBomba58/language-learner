@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace LanguageLearner.ANG.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     public class ResultsController : Controller
     {
@@ -20,6 +21,7 @@ namespace LanguageLearner.ANG.Controllers
         }
 
         // GET api/values
+        [Authorize(Roles = "Teacher")]
         [HttpGet]
         public IActionResult Get()
         {

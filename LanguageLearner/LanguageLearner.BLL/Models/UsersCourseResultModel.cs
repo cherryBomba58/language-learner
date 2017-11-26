@@ -8,7 +8,7 @@ namespace LanguageLearner.BLL.Models
     {
         public string FullName { get; set; }
         public string UserID { get; set; }
-        public int CourseID { get; set; }
+        public string CourseName { get; set; }
         public DateTime Date { get; set; }
         public int Points { get; set; }
     }
