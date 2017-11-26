@@ -273,7 +273,7 @@ namespace LanguageLearner.WPF.Menu
 
         private void ProfileMenu_Click(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new Profile());
+            Switcher.Switch(new Results());
         }
 
         private void LogoutMenu_Click(object sender, RoutedEventArgs e)

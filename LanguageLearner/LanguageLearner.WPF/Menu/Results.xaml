@@ -1,9 +1,10 @@
-﻿<UserControl x:Class="LanguageLearner.WPF.Menu.Profile"
+﻿<UserControl x:Class="LanguageLearner.WPF.Menu.Results"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LanguageLearner.WPF.Menu"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="525">
     <Grid Background="{DynamicResource {x:Static SystemColors.WindowBrushKey}}">
@@ -17,5 +18,47 @@
         <Button Content="Eredmények" HorizontalAlignment="Left" Margin="352,0,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="ProfileMenu_Click" RenderTransformOrigin="0.556,-0.526" Height="36"/>
         <Button Content="Kijelentkezés" HorizontalAlignment="Left" Margin="440,0,0,0" VerticalAlignment="Top" Width="85" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" Click="LogoutMenu_Click" Height="36"/>
         <Label Content="Eredmények" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="92" Foreground="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}" FontSize="14" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="0,36,0,0"/>
+        <DataGrid Name="ResultsDataGrid" HorizontalAlignment="Left" Height="166" Margin="10,79,0,0" VerticalAlignment="Top" Width="500" ItemsSource="{Binding}"
+            AutoGenerateColumns="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Felhasználó név" Binding="{Binding FullName}" Width="150"/>
+                <DataGridTextColumn Header="Kurzus" Binding="{Binding CourseName}" Width="125"/>
+                <DataGridTextColumn Header="Idő" Binding="{Binding Date}" Width="125"/>
+                <DataGridTextColumn Header="Elért pont" Binding="{Binding Points}" Width="100"/>
+            </DataGrid.Columns>
+
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=FullName}" FontWeight="Bold" Padding="3"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name}" />
+                                                    <TextBlock Text="{Binding Path=ItemCount}" Margin="8,0,4,0"/>
+                                                    <TextBlock Text="kitöltött teszt eddig"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+
+        </DataGrid>
     </Grid>
 </UserControl>
