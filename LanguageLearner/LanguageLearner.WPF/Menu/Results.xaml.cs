@@ -46,7 +46,7 @@ namespace LanguageLearner.WPF.Menu
 
             using (var client = HttpHelpers.InitializeHttpClient())
             {
-                HttpResponseMessage response = client.GetAsync("api/result").Result;
+                HttpResponseMessage response = client.GetAsync("api/results").Result;
                 if (HttpHelpers.IsSuccessfullRequest(response, "Váratlan hiba történt, a kuzusok lekérdezése nem sikerült. Kérjük, próbálja később!"))
                 {
                     currenResults = response.Content.ReadAsAsync<IEnumerable<UsersCourseResultModel>>().Result.ToList();

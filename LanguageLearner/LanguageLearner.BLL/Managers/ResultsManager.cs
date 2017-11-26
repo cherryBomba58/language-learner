@@ -23,7 +23,7 @@ namespace LanguageLearner.BLL.Managers
         public IEnumerable<UsersCourseResultModel> GetUsersCourseResults()
         {
             List<UsersCourseResultModel> results = new List<UsersCourseResultModel>();
-            foreach(var user in _context.Users)
+            foreach(var user in _context.Users.Include(u => u.CourseResultsList))
             {
                 results.AddRange(user.CourseResultsList.Select(r => new UsersCourseResultModel
                 {
@@ -40,7 +40,7 @@ namespace LanguageLearner.BLL.Managers
         public List<UsersCourseResultModel> GetUsersCourseResults(String id)
         {
             List<UsersCourseResultModel> results = new List<UsersCourseResultModel>();
-            var user = _context.Users.Single(u => u.Id == id);
+            var user = _context.Users.Include(u => u.CourseResultsList).Single(u => u.Id == id);
             results.AddRange(user.CourseResultsList.Select(r => new UsersCourseResultModel
             {
                 FullName = user.FullName,
